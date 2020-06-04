@@ -69,7 +69,7 @@ Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](
  
 > **_Question :_** Quelle ou quelles méthode(s) d’authentification est/sont proposé(s) au client ?
 > 
-> **_Réponse :_** 
+> Dans l'échange que nous avons pris, l'Authentificateur (machine cisco) fait requête pour utiliser la méthode EAP-TLS. Le suppliant répond à cette requête avec un NAK (legacy) et propose d'utiliser EAP-PEAP. Finallement, l'Authentificateur propose la méthode EAP-PEAP, ce qui conclu cette négotation.
 
 ---
 
