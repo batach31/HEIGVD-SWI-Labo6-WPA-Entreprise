@@ -50,32 +50,59 @@ rfkill unblock wlan
 Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](files/auth.pcap) avec Wireshark et fournir des captures d’écran indiquant dans chaque capture les données demandées.
 
 - Comparer [la capture](files/auth.pcap) au processus d’authentification donné en théorie (n’oubliez pas les captures d'écran pour illustrer vos comparaisons !). En particulier, identifier les étapes suivantes :
-	- Requête et réponse d’authentification système ouvert
- 	- Requête et réponse d’association (ou reassociation)
-	- Négociation de la méthode d’authentification entreprise
-	- Phase d’initiation. Arrivez-vous à voir l’identité du client ?
+	- Requête et réponse d’authentification système ouvert <br/>
+	![auth. à système ouvert](img/open_system_authentication_a.PNG)
+
+ 	- Requête et réponse d’association (ou reassociation) <br/>
+	![reassociation](img/reassociation_req_a.PNG)
+
+	- Négociation de la méthode d’authentification entreprise <br/>
+	![négociation ent. auth method](img/methode_auth_entreprise.PNG)
+
+	- Phase d’initiation. Arrivez-vous à voir l’identité du client ? **Réponse :** On peut voir que le client est Joel Gonin. <br/>
+	![identity req. resp.](img/identity_a.PNG)
+	![identité client](img/identity_b.PNG)
+
 	- Phase hello :
-		- Version TLS
-		- Suites cryptographiques et méthodes de compression proposées par le client et acceptées par l’AP
-		- Nonces
-		- Session ID
+		- client
+			- Version TLS : Le client propose la version TLS 1.2 <br/>
+			![client version TLS ](img/hello_client_a.PNG)
+
+			- Suites cryptographiques et méthodes de compression proposées par le client et acceptées par l’AP <br/>
+			![client cipher suite](img/hello_client_cipher_suite.PNG)
+			![client compression](img/hello_client_compression.PNG)
+
+			- Nonces <br/>
+			![client nonces](img/hello_client_nonces.PNG)
+
+			- Session ID <br/>
+			![client session ID](img/hello_client_session_id.PNG)
+		- serveur <br/>
+		![hello server packet](img/hello_server_a.PNG)
+		![hello server](img/hello_server_b.PNG)
 	- Phase de transmission de certificats
-	 	- Echanges des certificats
-		- Change cipher spec
-	- Authentification interne et transmission de la clé WPA (échange chiffré, vu comme « Application data »)
-	- 4-way handshake
+	 	- Echanges des certificats <br/>
+		![échange certificats](img/certificat_exchange.PNG)
+
+		- Change cipher spec <br/>
+		![échange cipher spec](img/change_cipher_spec.PNG)
+	- Authentification interne et transmission de la clé WPA (échange chiffré, vu comme « Application data ») <br/>
+	![auth. interne](img/authentification_interne_et_success_derivation_cle.PNG)
+
+	- 4-way handshake <br/>
+	![4-way handshake](img/4_way_handshake.PNG)
 
 ### Répondez aux questions suivantes :
  
 > **_Question :_** Quelle ou quelles méthode(s) d’authentification est/sont proposé(s) au client ?
 > 
-> Dans l'échange que nous avons pris, l'Authentificateur (machine cisco) fait requête pour utiliser la méthode EAP-TLS. Le suppliant répond à cette requête avec un NAK (legacy) et propose d'utiliser EAP-PEAP. Finallement, l'Authentificateur propose la méthode EAP-PEAP, ce qui conclu cette négotation.
+> **_Réponse:_** Dans l'échange que nous avons pris, l'Authentificateur (machine cisco) fait requête pour utiliser la méthode EAP-TLS. Le suppliant répond à cette requête avec un NAK (legacy) et propose d'utiliser EAP-PEAP. Finallement, l'Authentificateur propose la méthode EAP-PEAP, ce qui conclu cette négotation.
 
 ---
 
 > **_Question:_** Quelle méthode d’authentification est finalement utilisée ?
 > 
-> **_Réponse:_** 
+> **_Réponse:_** La méthode qui est finalement utilisée est EAP-PEAP.
 
 ---
 
@@ -83,11 +110,11 @@ Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](
 > 
 > - a. Le serveur envoie-t-il un certificat au client ? Pourquoi oui ou non ?
 > 
-> **_Réponse:_**
+> **_Réponse:_** Oui, le serveur envoie un certificat pour que le client puisse l'authentifier.
 > 
 > - b. Le client envoie-t-il un certificat au serveur ? Pourquoi oui ou non ?
 > 
-> **_Réponse:_**
+> **_Réponse:_** Non, on utilise EAP-PEAP qui utilise seulement un identifiant et un mot de passe.
 > 
 
 ---
