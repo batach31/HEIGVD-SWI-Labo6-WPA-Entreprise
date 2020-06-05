@@ -67,6 +67,7 @@ Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](
 		- client
 			- Version TLS : Le client propose la version TLS 1.2 <br/>
 			![client version TLS ](img/hello_client_a.PNG)
+			![client version TLS ](img/hello_client_b.PNG)
 
 			- Suites cryptographiques et méthodes de compression proposées par le client et acceptées par l’AP <br/>
 			![client cipher suite](img/hello_client_cipher_suite.PNG)
@@ -80,6 +81,8 @@ Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](
 		- serveur <br/>
 		![hello server packet](img/hello_server_a.PNG)
 		![hello server](img/hello_server_b.PNG)
+		<br/> Ici on peut voir que le serveur propose la version TLS 1.0 qui sera gardée. On peut aussi voir que la cipher suite utilisée
+		sera TLS RSA avec un chiffrement AES 256 - CBC - SHA
 	- Phase de transmission de certificats
 	 	- Echanges des certificats <br/>
 		![échange certificats](img/certificat_exchange.PNG)
@@ -88,9 +91,11 @@ Dans cette première partie, vous allez analyser [une connexion WPA Entreprise](
 		![échange cipher spec](img/change_cipher_spec.PNG)
 	- Authentification interne et transmission de la clé WPA (échange chiffré, vu comme « Application data ») <br/>
 	![auth. interne](img/authentification_interne_et_success_derivation_cle.PNG)
-
+	<br/> On peut voir que l'authentification interne a bien fonctionné avec le message "Success".
+	
 	- 4-way handshake <br/>
 	![4-way handshake](img/4_way_handshake.PNG)
+	
 
 ### Répondez aux questions suivantes :
  
